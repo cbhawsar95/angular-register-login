@@ -1,0 +1,129 @@
+﻿<h2>Register</h2>
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+  class="col-sm-6 offset-sm-3"
+>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      formControlName="name"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.name.invalid && f.name.touched }"
+    />
+    <div *ngIf="f.name.errors" class="invalid-feedback">
+      <div *ngIf="f.name.errors?.required">Name field is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      formControlName="email"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.email.invalid && f.email.touched }"
+    />
+
+    <div *ngIf="f.email.errors" class="invalid-feedback">
+      <div *ngIf="f.email.errors?.required">Email is required</div>
+      <div *ngIf="f.email.errors?.pattern">
+        Please enter valid email Id
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="mobileno">Mobile No</label>
+    <input
+      type="number"
+      formControlName="mobileno"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.mobileno.errors && f.mobileno.touched }"
+    />
+    <div *ngIf="f.mobileno.errors" class="invalid-feedback">
+      <div *ngIf="f.mobileno.errors?.required">Mobile number is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      formControlName="password"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }"
+    />
+    <div *ngIf="f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors?.required">Password is required</div>
+      <div *ngIf="f.password.errors?.minlength">
+        Password must be at least 6 characters
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="roomno">Room No</label>
+    <input
+      type="number"
+      formControlName="roomno"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.roomno.errors && f.roomno.touched }"
+    />
+    <div *ngIf="f.roomno.errors" class="invalid-feedback">
+      <div *ngIf="f.roomno.errors?.required">Room number is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="dob">Date of Birth</label>
+    <input
+      type="date"
+      formControlName="dob"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.dob.errors && f.dob.touched }"
+    />
+    <div *ngIf="f.dob.errors" class="invalid-feedback">
+      <div *ngIf="f.dob.errors?.required">Date of Birth is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cities">Coming from city</label>
+    <select
+      class="form-control"
+      formControlName="cities"
+      id="cities"
+      [ngClass]="{ 'is-invalid': f.cities.errors && f.cities.touched }"
+    >
+      <option
+        *ngFor="let city of cities; let i = index"
+        [value]="cities[i].name"
+      >
+        {{ cities[i].name }}
+      </option>
+    </select>
+    <div *ngIf="f.cities.errors" class="invalid-feedback">
+      <div *ngIf="f.cities.errors?.required">Please Select a city</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <input
+      type="text"
+      formControlName="notes"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': f.notes.errors && f.notes.touched }"
+    />
+    <div *ngIf="f.notes.errors" class="invalid-feedback">
+      <div *ngIf="f.notes.errors?.required">Notes are required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button [disabled]="loading && !registerForm.valid" class="btn btn-primary">
+      Register
+    </button>
+    <img
+      *ngIf="loading"
+      class="pl-3"
+      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+    <a routerLink="/login" class="btn btn-link">Cancel</a>
+  </div>
+</form>
